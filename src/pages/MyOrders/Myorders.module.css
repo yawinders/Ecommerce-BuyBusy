@@ -1,0 +1,44 @@
+.ordersContainer {
+    /* background-color: blue; */
+    width: 80%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+.ordersContainer h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.orderGroup h2 {
+    margin-top: 20px;
+    font-size: 1.2rem;
+}
+
+.ordersTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.ordersTable th,
+.ordersTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.ordersTable th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.ordersTable .totalRow {
+    font-weight: bold;
+    background-color: #f9f9f9;
+}
+
+.totalLabel {
+    text-align: right;
+}
