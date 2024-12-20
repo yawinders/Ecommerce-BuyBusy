@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { actions, authSelector } from '../../redux/reducers/authReducer'
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';

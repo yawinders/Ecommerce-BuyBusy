@@ -3,7 +3,7 @@ import styles from './Cart.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { actionsCart, cartSelector, decrementCartItem, incrementCartItems, removeCartItem, updateCartInFirebase } from '../../redux/reducers/cartReduer';
 import { authSelector } from '../../redux/reducers/authReducer';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { placeOrder } from '../../redux/reducers/myorderReducer';
 

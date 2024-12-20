@@ -10,7 +10,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS (optional fo
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-
     <App />
   </React.StrictMode>
 );

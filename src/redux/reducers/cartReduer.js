@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { db } from "../../firebaseConfig";
-import { doc, getDoc, increment, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
 

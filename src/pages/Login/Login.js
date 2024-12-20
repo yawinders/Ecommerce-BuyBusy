@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { actions } from '../../redux/reducers/authReducer';
 import { toast } from "react-toastify"
 import { doc, getDoc } from 'firebase/firestore';
-import { actionsCart, fetchCartItems } from '../../redux/reducers/cartReduer';
+import { fetchCartItems } from '../../redux/reducers/cartReduer';
 
 
 const Login = () => {
