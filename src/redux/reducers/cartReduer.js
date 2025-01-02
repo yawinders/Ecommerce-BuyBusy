@@ -79,7 +79,7 @@ export const addCartItemToFirebase = (item, userId) => async (dispatch, getState
 
 
 }
-//fetchig cart item from firebase during login
+//fetching cart item from firebase during login
 export const fetchCartItems = (userId) => async (dispatch) => {
     try {
         const cartRef = doc(db, 'carts', userId)

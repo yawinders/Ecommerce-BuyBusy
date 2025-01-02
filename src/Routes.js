@@ -9,6 +9,10 @@ import { ToastContainer } from 'react-toastify';
 import Cart from './pages/Cart/Cart';
 import Myorders from './pages/MyOrders/Myorders';
 import PrivateRoute from './components/PrivateRoute';
+import { Filter } from './components/Filter/Filter';
+import ProfileCard from './components/userProfile/ProfileCard';
+import BillComponent from './components/BillComponent/BillComponent';
+import ProductDetail from './pages/ProductDetails/ProductDetail';
 
 export default function Routes() {
     const router = createBrowserRouter([
@@ -40,6 +44,21 @@ export default function Routes() {
                 {
                     path: 'myorders',
                     element: <PrivateRoute element={<Myorders />} />
+                },
+                {
+                    path: 'filter',
+                    element: <Filter />
+                },
+                {
+                    path: 'profile',
+                    element: <PrivateRoute element={<ProfileCard />} />
+                }, {
+                    path: '/cart/bill',
+                    element: <PrivateRoute element={<BillComponent />} />
+                },
+                {
+                    path: "/product/:id",
+                    element: <ProductDetail />
                 }
             ]
         }

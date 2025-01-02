@@ -1,0 +1,103 @@
+.caraousel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Space between buttons */
+    position: relative;
+    width: 97%;
+
+    margin: 0 auto;
+    /* Centers the carousel */
+    height: 400px;
+    /* Fixed height */
+    overflow: hidden;
+    /* Prevents images from overflowing the container */
+    background-color: #f9f9f9;
+    /* Light background for a clean look */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Adds subtle shadow for depth */
+    border-radius: 10px;
+    /* Rounded corners */
+}
+
+.caraouselImages {
+    width: 100%;
+    /* Image stretches across the container */
+    height: 100%;
+    /* Matches container height */
+    object-fit: cover;
+    /* Ensures images maintain aspect ratio and fill the container */
+    transition: transform 0.3s ease-in-out;
+    /* Smooth animation for hover effects */
+    border-radius: 10px;
+    /* Matches the container's rounded corners */
+    z-index: 1;
+}
+
+.leftBtn,
+.rightBtn {
+    position: absolute;
+    /* Ensures buttons overlap the carousel */
+    top: 50%;
+    /* Vertically centers the buttons */
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Semi-transparent background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    /* Button size */
+    cursor: pointer;
+    font-size: 24px;
+    /* Adjusts size of icons */
+    border-radius: 50%;
+    /* Makes buttons circular */
+    z-index: 2;
+    /* Ensures buttons are above the image */
+    transition: background-color 0.2s ease;
+    /* Smooth transition for hover effects */
+}
+
+.leftBtn {
+    left: 8px;
+    /* Positions the left button */
+}
+
+.rightBtn {
+    right: 8px;
+    /* Positions the right button */
+}
+
+.leftBtn:hover,
+.rightBtn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Darkens the background on hover */
+}
+
+@media (max-width: 768px) {
+    .caraousel {
+        height: 250px;
+        /* Adjust height for smaller screens */
+    }
+
+    .leftBtn,
+    .rightBtn {
+        font-size: 20px;
+        /* Smaller button icons */
+        padding: 8px 16px;
+        /* Adjust button size */
+    }
+}
+
+@media (max-width: 480px) {
+    .caraousel {
+        height: 200px;
+        /* Further reduce height for mobile screens */
+    }
+
+    .leftBtn,
+    .rightBtn {
+        font-size: 18px;
+        padding: 6px 12px;
+    }
+}

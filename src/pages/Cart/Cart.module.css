@@ -1,11 +1,12 @@
 .cartAndPurchase {
+    margin-top: 100px;
     display: flex;
     flex-wrap: wrap;
 }
 
 /* Items */
 .items {
-    width: 80vw;
+    width: 70vw;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -124,4 +125,63 @@
 
 .checkboxContainer input {
     margin-right: 8px;
+}
+
+/* empty bag container */
+.emptyBagContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50vh;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    text-align: center;
+    padding: 20px;
+    /* margin: 10px auto; */
+
+}
+
+.contentBox {
+    background: #ffffff;
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.emptyBagImage {
+    width: 150px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.message {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.shopButton {
+    padding: 12px 25px;
+    background-color: #ff6f61;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.shopButton:hover {
+    background-color: #e65b50;
+    transform: scale(1.05);
 }

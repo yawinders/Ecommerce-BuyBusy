@@ -1,0 +1,80 @@
+.filterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background: linear-gradient(to right, #ffffff, #f9f9f9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 550px;
+    width: 100%;
+    max-height: 50vh;
+    height: 100%;
+    /* margin-left: 10px; */
+    /* margin: 0 auto; */
+}
+
+.priceFilter {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+}
+
+.label {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e63946;
+    margin-left: 0.5rem;
+}
+
+.categoryFilter {
+    text-align: center;
+}
+
+.purchaseButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.purchaseButton:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.purchaseButton:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .filterContainer {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .priceFilter {
+        font-size: 1rem;
+    }
+
+    .purchaseButton {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}

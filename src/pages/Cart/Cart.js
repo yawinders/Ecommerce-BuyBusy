@@ -1,11 +1,15 @@
 import React from 'react'
 import styles from './Cart.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { actionsCart, cartSelector, decrementCartItem, incrementCartItems, removeCartItem, updateCartInFirebase } from '../../redux/reducers/cartReduer';
+import { cartSelector, decrementCartItem, incrementCartItems, removeCartItem } from '../../redux/reducers/cartReduer';
 import { authSelector } from '../../redux/reducers/authReducer';
+
+
+
+import ProfileCard from '../../components/userProfile/ProfileCard';
+import { Total } from '../../components/Total/Total';
+import Caraousel from '../../components/Caraousel/Caraousel';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { placeOrder } from '../../redux/reducers/myorderReducer';
 
 export default function Cart() {
     const { items } = useSelector(cartSelector);
@@ -28,37 +32,36 @@ export default function Cart() {
         }
     }
 
-    const handlePurchase = () => {
-        if (!user) {
-            toast.error("Please login to place an order.");
-            return;
-        }
-        const orderData = {
-            date: new Date().toISOString(),
-            items: items.map(item => {
-                const id = item.id;
-                const title = item.title;
-                const quantity = item.quantity;
-                const price = item.price;
-                return { id, title, quantity, price };
-            }),
-            totalPrice: items.reduce((acc, item) => acc + item.price * item.quantity, 0),
-        }
-        //placing order
-        dispatch(placeOrder(orderData, user.uid))
-
-        //clearing the cart in redux and fireStore
-        dispatch(actionsCart.setToCart([]))
-        dispatch(updateCartInFirebase(user.uid, []))
-        navigate('/myorders')
-    }
-
+    const handleShopNow = () => {
+        navigate('/'); // Adjust this path to your shop route
+    };
     return (
         <div className={styles.cartAndPurchase}>
+
+            <ProfileCard />
+
+
+
             <div className={styles.items}>
+
                 {
                     items.length === 0 ?
-                        <h3>Your Cart is Empty</h3>
+                        <div className={styles.emptyBagContainer}>
+                            <div className={styles.contentBox}>
+                                <img
+                                    src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"
+                                    alt="Empty Bag"
+                                    className={styles.emptyBagImage}
+                                />
+                                <h1 className={styles.title}>Your Bag is Feeling Light</h1>
+                                <p className={styles.message}>
+                                    You haven’t added anything to your bag yet. Let’s fix that!
+                                </p>
+                                <button className={styles.shopButton} onClick={handleShopNow}>
+                                    Shop Now
+                                </button>
+                            </div>
+                        </div>
                         :
                         (
                             items.map((product) => {
@@ -82,19 +85,10 @@ export default function Cart() {
 
                             }))}
             </div>
-            <div className={styles.filterContainer}>
-                {/* <h3 className={styles.title}>Filter</h3> */}
-                <div className={styles.priceFilter}>
-                    <label>TotalPrice:
-                        {items.reduce((acc, i) => acc + i.price * i.quantity, 0)}
-                    </label>
 
-                </div>
-                <div className={styles.categoryFilter}>
-                    {/* <h4>Category</h4> */}
-                    <button onClick={handlePurchase}> Purchase</button>
-                </div>
-            </div>
+
+            <Total />
+
         </div>
     )
 }

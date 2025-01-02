@@ -1,0 +1,46 @@
+/* filter */
+.filterContainer {
+    margin-top: 10px;
+    background-color: #f8f9ff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: auto;
+    position: sticky;
+    top: 200px;
+    /* Keeps filter fixed at the top when scrolling */
+}
+
+.title {
+    font-size: 1.2rem;
+    color: #1e4e8c;
+    margin-bottom: 20px;
+}
+
+.priceFilter label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.slider {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.categoryFilter h4 {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #1e4e8c;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.checkboxContainer input {
+    margin-right: 8px;
+}

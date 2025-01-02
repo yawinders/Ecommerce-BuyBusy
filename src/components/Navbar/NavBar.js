@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { actions, authSelector } from '../../redux/reducers/authReducer'
 import { signOut } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
+import styles from './NavBar.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping, faUser, faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { cartSelector } from '../../redux/reducers/cartReduer';
+import { actionProduct, productSelector } from '../../redux/reducers/productReducer';
+import { actionFilter, filterProducts, filterSelector } from '../../redux/reducers/filterReducer';
 
 export default function NavBar() {
 
+    const [searchInput, setSearchInput] = useState('')
     const { isAuthenticated } = useSelector(authSelector);
     const { user } = useSelector(authSelector)
+    const { items } = useSelector(cartSelector)
+    const { items: products } = useSelector(productSelector)
+
+    const { suggestionList, searchQuery, price, selectedCategory } = useSelector(filterSelector)
+
     const dispatch = useDispatch();
     const handleLogout = async (e) => {
-        console.log("Logout handler triggered");
+        // console.log("Logout handler triggered");
         const confirmation = window.confirm("Are you sure you want to log out?");
-        console.log(confirmation)
+        // console.log(confirmation)
         if (!confirmation) return; // Exit if the user cancels the logout
 
         try {
@@ -26,60 +38,103 @@ export default function NavBar() {
             toast.error("Failed to log out");
         }
     }
+    const handleSearch = (e) => {
+        const searchInp = e.target.value.toLowerCase(); // Convert input to lowercase for 
+        // case-insensitive search
+        setSearchInput(searchInp)
+
+        dispatch(actionFilter.setSearchQuery(searchInp))
+
+    }
+
+    useEffect(() => {
+
+        dispatch(filterProducts());
+    }, [dispatch, searchQuery, selectedCategory, price]);
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <div className="container-fluid">
-                    <a className="navbar-brand" href="/">
+            <nav>
+                <div className={styles.header}>
+                    <a href="/" className={styles.logo}>
                         BUYBUSY
+
                     </a>
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/">
+
+                    <span className={styles.welcome}>
+                        {user ? `Welcome ${user.name}` : 'Welcome to BUYBUSY'}
+                        <div className={styles.flag}>
+                            {/* add india flag icon here  */}
+                            <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" />
+                        </div>
+                    </span>
+
+                    <div className={styles.searchBar}>
+
+                        <input
+                            type="text"
+                            placeholder="Search By Name"
+                            value={searchInput}
+                            className={styles.searchInput}
+                            onChange={handleSearch}
+                        />
+                        <icon onClick={() => {
+                            setSearchInput("")
+                            dispatch(actionFilter.setSuggestionList([]))
+                            dispatch(actionFilter.setFilteredProducts(products))
+                        }}>X</icon>
+
+                    </div>
+                    <div className={styles.navItem}>
+                        <ul>
+                            <li>
+                                <Link to="/">
                                     Home
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/myorders">
-                                    {isAuthenticated && "MyOrders"}
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to='/cart'>
-                                    {isAuthenticated && 'Cart'}
-                                </Link>
-                            </li>
-                            {isAuthenticated ? (<li className="nav-item">
-                                <Link className="nav-link" onClick={handleLogout}>
-                                    logout
-                                </Link>
-                            </li>) : (<li className="nav-item">
-                                <a className="nav-link" href="/login">
-                                    Login
-                                </a>
-                            </li>)}
-                            <li className="nav-item">
-                                <p className="nav-link active" aria-current="page" style={{ color: "green" }}>
-                                    {user ? `Welcome ${user.name}` : 'Welcome to BuyBusy'}
-                                </p>
-                            </li>
+                            {isAuthenticated && (
+                                <li>
+                                    <Link to="/myorders">
+                                        My Orders
+                                    </Link>
+                                </li>
+                            )}
+                            {isAuthenticated && (
+                                <li className={styles.cartIcon}>
+                                    <Link to="/cart">
+                                        Cart
+                                        <FontAwesomeIcon icon={faCartShopping} style={{ marginLeft: '8px' }} />
+                                    </Link>
+                                    <span>{items.length}</span> {/* Example cart count */}
+                                </li>
+                            )}
+                            {isAuthenticated ? (
+                                <li>
+                                    <Link to="#" onClick={handleLogout}>
+                                        Logout <FontAwesomeIcon icon={faSignOutAlt} />
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li>
+                                    <Link to="/login">
+                                        Login <FontAwesomeIcon icon={faSignInAlt} />
+                                    </Link>
+                                </li>
+                            )}
                         </ul>
                     </div>
                 </div>
             </nav>
+            <div className={`${styles.suggestionList} ${(suggestionList.length > 0 && searchInput) ? styles.visible : ''}`} >
+                {suggestionList && suggestionList.map((list) => {
+                    return <p className={styles.list} key={list.id} onClick={() => {
+                        setSearchInput(list)
+                        dispatch(actionFilter.setSuggestionList([]))
+                        window.scrollTo(0, 500)
+
+                    }} >{list}</p>
+                })}
+            </div>
 
         </>
     )

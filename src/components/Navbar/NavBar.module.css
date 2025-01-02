@@ -1,0 +1,177 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    background-color: #232f3e;
+    padding: 10px 20px;
+    color: white;
+    font-family: Arial, sans-serif;
+    z-index: 10;
+    width: 100vw;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.logo img {
+    width: 25px;
+    height: 25px;
+    margin-left: 8px;
+}
+
+.navItem ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    right: 50px;
+
+}
+
+.navItem ul li {
+    position: relative;
+}
+
+.navItem ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.navItem ul li a:hover {
+    color: #f90;
+}
+
+.welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 2rem;
+    margin-right: 20px;
+    color: #90ee90;
+}
+
+.cartIcon {
+    position: relative;
+}
+
+.cartIcon span {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #f90;
+    color: black;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+.searchBar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    border-radius: 4px;
+    width: 700px;
+    position: relative;
+    right: 100px;
+}
+
+.searchInput {
+    border: none;
+    flex-grow: 1;
+    padding: 5px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.searchBar icon {
+    color: #232f3e;
+    font-size: 1.2rem;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.flag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+}
+
+.flag img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+.suggestionList {
+    position: fixed;
+    top: 52%;
+    /* Center vertically */
+    left: 59%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    /* True centering */
+    z-index: 1000;
+    /* Place on top */
+    background-color: white;
+    /* Make it stand out */
+    border: 1px solid #ddd;
+    /* Subtle border */
+    border-radius: 5px;
+    /* Smooth edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Slight shadow for depth */
+    width: 700px;
+    /* Adjust width */
+    padding: 10px;
+    /* Spacing inside */
+    text-align: center;
+    /* Center the text */
+    visibility: hidden;
+    /* Hidden by default */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+    /* Smooth transition for visibility */
+}
+
+.suggestionList.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.list {
+    margin: 5px 0;
+
+    padding: 8px 0;
+
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    color: rgb(12, 12, 13);
+
+}
+
+.list:hover {
+    background-color: #f0f0f0;
+    /* Highlight suggestion on hover */
+    border-radius: 3px;
+    /* Match the smoothness */
+}

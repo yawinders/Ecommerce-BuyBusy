@@ -1,0 +1,129 @@
+.productDetailContainer {
+    margin-top: 100px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.backButton {
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #ff6f61;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.backButton:hover {
+    background-color: #e65b50;
+    transform: scale(1.05);
+}
+
+.productCard {
+    display: flex;
+    flex-direction: column;
+    max-width: 900px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    width: 90%;
+}
+
+.productCard:hover {
+    transform: scale(1.02);
+}
+
+.imageSection {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background: #f9f9f9;
+}
+
+.productImage {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.detailsSection {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.category {
+    font-size: 16px;
+    color: #777;
+    font-style: italic;
+}
+
+.description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.priceRating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+
+.price {
+    font-weight: bold;
+    color: #3399cc;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    color: #ffcc00;
+    gap: 5px;
+}
+
+.starIcon {
+    color: #ffcc00;
+}
+
+.cartButton {
+    padding: 12px 25px;
+    background-color: #3399cc;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cartButton:hover {
+    background-color: #2879a1;
+    transform: scale(1.05);
+}
+
+.cartIcon {
+    font-size: 18px;
+}
