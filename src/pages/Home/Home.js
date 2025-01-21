@@ -9,10 +9,10 @@ import ProfileCard from '../../components/userProfile/ProfileCard';
 import { Filter } from '../../components/Filter/Filter';
 import Caraousel from '../../components/Caraousel/Caraousel';
 import { filterProducts, filterSelector } from '../../redux/reducers/filterReducer';
-import ProductDetail from '../ProductDetails/ProductDetail';
+
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../components/Loader';
-import Footer from '../../components/Footer/Footer';
+
 
 let price = 0;
 export default function Home() {
@@ -69,91 +69,90 @@ export default function Home() {
 
 
     return (
-        <div className={styles.homeAndFooter}>
-            <div className={styles.FeaturesAndHome}>
-                {/* Left Sidebar */}
-                <aside className={styles.ProfileAndFilter}>
-                    <ProfileCard />
-                    <Filter />
-                </aside>
+        // <div className={styles.homeAndFooter}>
+        <div className={styles.FeaturesAndHome}>
+            {/* Left Sidebar */}
+            <aside className={styles.ProfileAndFilter}>
+                <ProfileCard />
+                <Filter />
+            </aside>
 
-                {/* Right Content */}
-                <main className={styles.HomeAndPagination}>
-                    {/* caraousel section */}
-                    <Caraousel />
+            {/* Right Content */}
+            <main className={styles.HomeAndPagination}>
+                {/* caraousel section */}
+                <Caraousel />
 
-                    {/* Products Section */}
+                {/* Products Section */}
 
-                    {/* ---- */}
-                    <div className={styles.cardDad}>
-                        {filteredProducts.slice(page * 8 - 8, page * 8).map((product, i) => (
-                            <div className={styles.card} key={i} >
-                                <img onClick={() => handleProductClick(product)} src={product.image} alt={product.title} className={styles.image} />
-                                <h3 className={styles.title}>{product.title}</h3>
-                                <p className={styles.price}>₹ {product.price}</p>
-                                {items.some((c) => c.id === product.id) ? (<button
-                                    className={styles.addedSuccessfulyBtn}
-                                // onClick={() => handleAddToCart(product)}
-                                >
+                {/* ---- */}
+                <div className={styles.cardDad}>
+                    {filteredProducts.slice(page * 8 - 8, page * 8).map((product, i) => (
+                        <div className={styles.card} key={i} >
+                            <img onClick={() => handleProductClick(product)} src={product.image} alt={product.title} className={styles.image} />
+                            <h3 className={styles.title}>{product.title}</h3>
+                            <p className={styles.price}>₹ {product.price}</p>
+                            {items.some((c) => c.id === product.id) ? (<button
+                                className={styles.addedSuccessfulyBtn}
+                            // onClick={() => handleAddToCart(product)}
+                            >
 
-                                    <FaShoppingCart className={styles.icon} /> Added Successfuly
-                                </button>) : (<button
-                                    className={styles.addToCartButton}
-                                    onClick={() => handleAddToCart(product)}
-                                >
+                                <FaShoppingCart className={styles.icon} /> Added Successfuly
+                            </button>) : (<button
+                                className={styles.addToCartButton}
+                                onClick={() => handleAddToCart(product)}
+                            >
 
-                                    <FaShoppingCart className={styles.icon} /> Add to Cart
-                                </button>)}
+                                <FaShoppingCart className={styles.icon} /> Add to Cart
+                            </button>)}
 
-                            </div>
+                        </div>
+                    ))}
+                </div>
+                {/* ---- */}
+
+                {/* Pagination Section */}
+                <div className={styles.paginationn}>
+                    <button
+                        onClick={() => setPage(page - 1)}
+                        disabled={page === 1}
+                        className={styles.paginationButton}
+                    >
+                        {"<"}
+                    </button>
+                    {Array(Math.floor(al / 6))
+                        .fill(0)
+                        .map((_, i) => (
+                            <span
+                                className={styles.pageno}
+                                key={i}
+                                style={{
+                                    fontSize: "1.2rem",
+                                    cursor: "pointer",
+                                    backgroundColor: i + 1 === page ? "gray" : "",
+                                }}
+                                onClick={() => setPage(i + 1)}
+                            >
+                                {i + 1}
+                            </span>
                         ))}
-                    </div>
-                    {/* ---- */}
-
-                    {/* Pagination Section */}
-                    <div className={styles.paginationn}>
-                        <button
-                            onClick={() => setPage(page - 1)}
-                            disabled={page === 1}
-                            className={styles.paginationButton}
-                        >
-                            {"<"}
-                        </button>
-                        {Array(Math.floor(al / 6))
-                            .fill(0)
-                            .map((_, i) => (
-                                <span
-                                    className={styles.pageno}
-                                    key={i}
-                                    style={{
-                                        fontSize: "1.2rem",
-                                        cursor: "pointer",
-                                        backgroundColor: i + 1 === page ? "gray" : "",
-                                    }}
-                                    onClick={() => setPage(i + 1)}
-                                >
-                                    {i + 1}
-                                </span>
-                            ))}
-                        <button
-                            onClick={() => {
-                                setPage(page + 1)
-                                if (page === Math.floor(al / 6)) {
-                                    setPage(1)
-                                }
-                            }}
-                            disabled={page === Math.ceil(al / 4)}
-                            className={styles.paginationButton}
-                        >
-                            {">"}
-                        </button>
-                    </div>
-                </main>
-            </div>
-
-            <Footer />
-
-
+                    <button
+                        onClick={() => {
+                            setPage(page + 1)
+                            if (page === Math.floor(al / 6)) {
+                                setPage(1)
+                            }
+                        }}
+                        disabled={page === Math.ceil(al / 4)}
+                        className={styles.paginationButton}
+                    >
+                        {">"}
+                    </button>
+                </div>
+            </main>
         </div>
+
+
+
+        // </div>
     )
 }

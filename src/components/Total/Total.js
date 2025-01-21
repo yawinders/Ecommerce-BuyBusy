@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './Total.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { actionsCart, cartSelector, updateCartInFirebase } from '../../redux/reducers/cartReduer'
+import { cartSelector } from '../../redux/reducers/cartReduer'
 import { authSelector } from '../../redux/reducers/authReducer'
 import { toast } from 'react-toastify';
-import { placeOrder } from '../../redux/reducers/myorderReducer'
+
 import { useNavigate } from 'react-router-dom'
 import Caraousel from '../Caraousel/Caraousel'
 export const Total = () => {

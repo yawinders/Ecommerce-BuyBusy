@@ -7,7 +7,7 @@ import { auth } from '../../firebaseConfig';
 import { toast } from 'react-toastify';
 import styles from './NavBar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping, faUser, faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { cartSelector } from '../../redux/reducers/cartReduer';
 import { productSelector } from '../../redux/reducers/productReducer';
 import { actionFilter, filterProducts, filterSelector } from '../../redux/reducers/filterReducer';

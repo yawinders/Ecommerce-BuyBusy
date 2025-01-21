@@ -8,7 +8,7 @@ import { authSelector } from '../../redux/reducers/authReducer';
 
 import ProfileCard from '../../components/userProfile/ProfileCard';
 import { Total } from '../../components/Total/Total';
-import Caraousel from '../../components/Caraousel/Caraousel';
+
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 
