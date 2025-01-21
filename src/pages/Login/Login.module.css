@@ -1,5 +1,7 @@
 /* Container styling */
 .container {
+    background-image: url('../../assets/images/signLog.webp');
+    background-size: contain;
     display: flex;
     justify-content: center;
     align-items: center;

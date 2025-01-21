@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './UploadPicModal.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { authSelector } from '../../redux/reducers/authReducer';
-import { uploadProfilePic, userProfileActions, userProfileSelector } from '../../redux/reducers/userProfileReducer';
+import { uploadProfilePic, userProfileActions } from '../../redux/reducers/userProfileReducer';
 import { toast } from 'react-toastify';
 
 const UploadPicModal = ({ toggelUploadPicModal }) => {
@@ -10,6 +10,7 @@ const UploadPicModal = ({ toggelUploadPicModal }) => {
     const [previewUrl, setPreviewUrl] = useState(null);
     // const { profilePicUrl } = useSelector(userProfileSelector)
     // console.log(profilePicUrl);
+    const [base64Image, setBase64Image] = useState(null)
 
     const { user } = useSelector(authSelector)
     const dispatch = useDispatch();
@@ -20,6 +21,21 @@ const UploadPicModal = ({ toggelUploadPicModal }) => {
             setProfilePic(file)
             const fileUrl = URL.createObjectURL(file);
             setPreviewUrl(fileUrl);
+
+
+            // Convert the Blob (file) to a Base64 string
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                // This is the Base64 representation of the image
+                const base64Imagee = reader.result;
+                setBase64Image(base64Imagee)
+                console.log("Base64 Image: ", base64Image);
+
+                // You can now use the base64Image (save it to Firebase, display it, etc.)
+                // For example, saving it to Firebase:
+                // saveProfileImageToFirestore(userId, base64Image);
+            };
+            reader.readAsDataURL(file);
         }
     }
 
@@ -40,7 +56,7 @@ const UploadPicModal = ({ toggelUploadPicModal }) => {
             alert("Must Selelct Something")
             return
         }
-        dispatch(uploadProfilePic(previewUrl, user.uid))
+        dispatch(uploadProfilePic(base64Image, user.uid))
         toggelUploadPicModal()
         toast.success("Image Uploaded Successfully")
 

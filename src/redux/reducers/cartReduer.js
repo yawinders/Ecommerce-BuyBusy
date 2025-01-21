@@ -119,6 +119,7 @@ export const removeCartItem = (itemId, userId) => (dispatch, getState) => {
     dispatch(updateCartInFirebase(userId, updatedItems));
     toast.success("Item Removed Successfuly")
 };
+
 export const cartReducer = cartSlice.reducer;
 export const actionsCart = cartSlice.actions;
 export const cartSelector = (state) => state.cartReducer;

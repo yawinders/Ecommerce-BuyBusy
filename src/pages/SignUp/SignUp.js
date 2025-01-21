@@ -18,6 +18,24 @@ const SignUp = () => {
 
     const handleSignUp = async (e) => {
         e.preventDefault();
+        // Input validation
+        if (!name || !email || !password) {
+            toast.error("All fields are required.");
+            return;
+        }
+
+        // Email format validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            toast.error("Please enter a valid email address.");
+            return;
+        }
+
+        // Password strength validation
+        if (password.length < 6) {
+            toast.error("Password must be at least 6 characters long.");
+            return;
+        }
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 

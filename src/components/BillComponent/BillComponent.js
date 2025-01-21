@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import styles from './BillComponent.module.css';
-// import Razorpay from './Razorpay'; 
-// import Address from './Address'; 
-// Address component
+
 import { useSelector } from 'react-redux';
 import { cartSelector } from '../../redux/reducers/cartReduer';
 import { addressSelector } from '../../redux/reducers/addressReducer';

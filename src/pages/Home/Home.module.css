@@ -1,3 +1,10 @@
+.homeAndFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 100px;
+}
+
 .FeaturesAndHome {
     margin-top: 100px;
     display: flex;
@@ -18,7 +25,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    overflow-y: auto;
+    margin-bottom: 100px;
+    overflow-y: scroll;
 }
 
 .HomeAndPagination {
@@ -200,6 +208,21 @@
 /* Button styling */
 .addToCartButton {
     background-color: #0077b5;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.addedSuccessfulyBtn {
+    background-color: rgb(171, 99, 99);
     color: #ffffff;
     border: none;
     border-radius: 6px;

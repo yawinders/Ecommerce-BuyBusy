@@ -9,7 +9,7 @@ import styles from './NavBar.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faUser, faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 import { cartSelector } from '../../redux/reducers/cartReduer';
-import { actionProduct, productSelector } from '../../redux/reducers/productReducer';
+import { productSelector } from '../../redux/reducers/productReducer';
 import { actionFilter, filterProducts, filterSelector } from '../../redux/reducers/filterReducer';
 
 export default function NavBar() {
@@ -64,7 +64,7 @@ export default function NavBar() {
                     <span className={styles.welcome}>
                         {user ? `Welcome ${user.name}` : 'Welcome to BUYBUSY'}
                         <div className={styles.flag}>
-                            {/* add india flag icon here  */}
+
                             <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" />
                         </div>
                     </span>
@@ -83,7 +83,16 @@ export default function NavBar() {
                             dispatch(actionFilter.setSuggestionList([]))
                             dispatch(actionFilter.setFilteredProducts(products))
                         }}>X</icon>
+                        <div className={`${styles.suggestionList} ${(suggestionList.length > 0 && searchInput) ? styles.visible : ''}`} >
+                            {suggestionList && suggestionList.map((list) => {
+                                return <p className={styles.list} key={list.id} onClick={() => {
+                                    setSearchInput(list)
+                                    dispatch(actionFilter.setSuggestionList([]))
+                                    window.scrollTo(0, 500)
 
+                                }} >{list}</p>
+                            })}
+                        </div>
                     </div>
                     <div className={styles.navItem}>
                         <ul>
@@ -125,16 +134,7 @@ export default function NavBar() {
                     </div>
                 </div>
             </nav>
-            <div className={`${styles.suggestionList} ${(suggestionList.length > 0 && searchInput) ? styles.visible : ''}`} >
-                {suggestionList && suggestionList.map((list) => {
-                    return <p className={styles.list} key={list.id} onClick={() => {
-                        setSearchInput(list)
-                        dispatch(actionFilter.setSuggestionList([]))
-                        window.scrollTo(0, 500)
 
-                    }} >{list}</p>
-                })}
-            </div>
 
         </>
     )

@@ -10,6 +10,7 @@
     position: sticky;
     top: 200px;
     /* Keeps filter fixed at the top when scrolling */
+    z-index: 100;
 }
 
 .title {

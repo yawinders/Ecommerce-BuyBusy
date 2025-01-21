@@ -61,7 +61,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-right: 20px;
     color: #90ee90;
 }
@@ -123,9 +123,9 @@
 
 .suggestionList {
     position: fixed;
-    top: 52%;
+    top: 38%;
     /* Center vertically */
-    left: 59%;
+    left: 51%;
     /* Center horizontally */
     transform: translate(-50%, -50%);
     /* True centering */

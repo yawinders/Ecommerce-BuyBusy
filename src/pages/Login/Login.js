@@ -18,6 +18,10 @@ const Login = () => {
 
     const handleLogIn = async (e) => {
         e.preventDefault();
+        if (!email || !password) {
+            toast.error("Please enter email and password.");
+            return;
+        }
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             //fetching userdetails from firebase

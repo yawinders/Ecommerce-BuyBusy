@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+
 import styles from './Filter.module.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { productSelector } from '../../redux/reducers/productReducer';
-import { actionFilter, filterProducts, filterSelector } from '../../redux/reducers/filterReducer'
+
+import { actionFilter, filterSelector } from '../../redux/reducers/filterReducer'
 
 let price = 0;
 export const Filter = () => {

@@ -12,6 +12,7 @@ const ProfileCard = ({ name = "Guest User", location = "Unknown Location" }) => 
     const dispatch = useDispatch();
 
     const defaultProfileImage = "https://via.placeholder.com/150";
+    console.log(profilePicUrl)
 
     useEffect(() => {
         if (user) {
@@ -31,7 +32,7 @@ const ProfileCard = ({ name = "Guest User", location = "Unknown Location" }) => 
                 <div className={styles.headerBackground}></div>
                 <div className={styles.profileImageContainer}>
                     <img
-                        src={profileImageSrc}
+                        src={profileImageSrc || defaultProfileImage}
                         alt={`${user?.name || "Guest User"}'s profile`}
                         className={styles.profileImage}
                         onError={(e) => {
