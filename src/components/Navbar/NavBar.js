@@ -62,38 +62,110 @@ export default function NavBar() {
                     </a>
 
                     <span className={styles.welcome}>
-                        {user ? `Welcome ${user.name}` : 'Welcome to BUYBUSY'}
+                        {user ? `Welcomes You` : 'Welcomes You'}
                         <div className={styles.flag}>
 
                             <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="India Flag" />
                         </div>
                     </span>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%",
+                            maxWidth: "400px",
+                            margin: "0 auto",
+                            position: "relative", // Important for suggestion list alignment
+                        }}
+                    >
+                        {/* Search Bar */}
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                border: "1px solid #ccc",
+                                borderRadius: "4px",
+                                padding: "5px",
+                                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                            }}
+                        >
+                            <input
+                                type="text"
+                                placeholder="Search By Name"
+                                value={searchInput}
+                                onChange={handleSearch}
+                                style={{
+                                    flex: 1,
+                                    border: "none",
+                                    outline: "none",
+                                    padding: "5px 10px",
+                                    fontSize: "16px",
+                                    borderRadius: "4px",
+                                }}
+                            />
+                            <span
+                                onClick={() => {
+                                    setSearchInput("");
+                                    dispatch(actionFilter.setSuggestionList([]));
+                                    dispatch(actionFilter.setFilteredProducts(products));
+                                }}
+                                style={{
+                                    cursor: "pointer",
+                                    marginLeft: "10px",
+                                    color: "#999",
+                                    fontWeight: "bold",
+                                    fontSize: "18px",
+                                }}
+                            >
+                                ×
+                            </span>
+                        </div>
 
-                    <div className={styles.searchBar}>
-
-                        <input
-                            type="text"
-                            placeholder="Search By Name"
-                            value={searchInput}
-                            className={styles.searchInput}
-                            onChange={handleSearch}
-                        />
-                        <icon onClick={() => {
-                            setSearchInput("")
-                            dispatch(actionFilter.setSuggestionList([]))
-                            dispatch(actionFilter.setFilteredProducts(products))
-                        }}>X</icon>
-                        <div className={`${styles.suggestionList} ${(suggestionList.length > 0 && searchInput) ? styles.visible : ''}`} >
-                            {suggestionList && suggestionList.map((list) => {
-                                return <p className={styles.list} key={list.id} onClick={() => {
-                                    setSearchInput(list)
-                                    dispatch(actionFilter.setSuggestionList([]))
-                                    window.scrollTo(0, 500)
-
-                                }} >{list}</p>
-                            })}
+                        {/* Suggestion List */}
+                        <div
+                            style={{
+                                color: 'black',
+                                position: "absolute", // Positioned relative to the parent div
+                                top: "100%", // Align just below the input box
+                                left: 0,
+                                width: "100%", // Matches the width of the parent div
+                                backgroundColor: "white",
+                                border: "1px solid #ccc",
+                                borderRadius: "4px",
+                                marginTop: "5px",
+                                zIndex: 1000,
+                                boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+                                display: suggestionList.length > 0 && searchInput ? "block" : "none",
+                                maxHeight: "200px",
+                                overflowY: "auto",
+                            }}
+                        >
+                            {suggestionList &&
+                                suggestionList.map((list) => (
+                                    <p
+                                        key={list.id}
+                                        onClick={() => {
+                                            setSearchInput(list);
+                                            dispatch(actionFilter.setSuggestionList([]));
+                                            window.scrollTo(0, 400);
+                                        }}
+                                        style={{
+                                            padding: "10px",
+                                            margin: 0,
+                                            cursor: "pointer",
+                                            backgroundColor: "#fff",
+                                            borderBottom: "1px solid #eee",
+                                            transition: "background-color 0.2s",
+                                        }}
+                                        onMouseEnter={(e) => (e.target.style.backgroundColor = "#f5f5f5")}
+                                        onMouseLeave={(e) => (e.target.style.backgroundColor = "#fff")}
+                                    >
+                                        {list}
+                                    </p>
+                                ))}
                         </div>
                     </div>
+
                     <div className={styles.navItem}>
                         <ul>
                             <li>

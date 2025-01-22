@@ -8,9 +8,11 @@ import { actions } from '../../redux/reducers/authReducer';
 import { toast } from "react-toastify"
 import { doc, getDoc } from 'firebase/firestore';
 import { fetchCartItems } from '../../redux/reducers/cartReduer';
+import Loader from '../../components/Loader';
 
 
 const Login = () => {
+    const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
@@ -18,8 +20,10 @@ const Login = () => {
 
     const handleLogIn = async (e) => {
         e.preventDefault();
+        setLoading(true)
         if (!email || !password) {
             toast.error("Please enter email and password.");
+            setLoading(false)
             return;
         }
         try {
@@ -35,11 +39,13 @@ const Login = () => {
                 toast.error("User don't exist")
                 return
             }
-
+            setLoading(false)
             toast.success("LogIn Successfuly")
             navigate('/')
         } catch (error) {
-            toast.error("Login failed. Please check your credentials.")
+            console.error("Login error:", error.code, error.message);
+            toast.error(`Login failed: ${error.message}`);
+            setLoading(false)
         }
 
     }
@@ -67,7 +73,7 @@ const Login = () => {
                     <button type="submit" className={styles.button}
                         onClick={handleLogIn}
                     >
-                        Login
+                        {loading ? (<div style={{ display: "flex", justifyContent: "center" }}><Loader /></div>) : ("Login")}
                     </button>
                 </form>
                 <p className={styles.footer}>

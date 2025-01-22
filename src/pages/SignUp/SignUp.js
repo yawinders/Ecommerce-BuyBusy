@@ -8,8 +8,10 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 import { auth, db } from '../../firebaseConfig';
+import Loader from '../../components/Loader';
 
 const SignUp = () => {
+    const [loading, setLoading] = useState(false)
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -19,8 +21,10 @@ const SignUp = () => {
     const handleSignUp = async (e) => {
         e.preventDefault();
         // Input validation
+        setLoading(true)
         if (!name || !email || !password) {
             toast.error("All fields are required.");
+            setLoading(false)
             return;
         }
 
@@ -28,15 +32,18 @@ const SignUp = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             toast.error("Please enter a valid email address.");
+            setLoading(false)
             return;
         }
 
         // Password strength validation
         if (password.length < 6) {
             toast.error("Password must be at least 6 characters long.");
+            setLoading(false)
             return;
         }
         try {
+
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
             //saving user details tofirebase db
@@ -48,11 +55,13 @@ const SignUp = () => {
             });
 
             dispatch(actions.login({ name, email, uid: userCredential.user.uid }));
+            setLoading(false)
             toast.success("User Register Successfully")
             navigate('/')
         } catch (error) {
             console.log(error)
             toast.error("Already Registered")
+            setLoading(false)
 
         }
     }
@@ -61,6 +70,7 @@ const SignUp = () => {
     return (
         <div className={styles.container}>
             <div className={styles.card}>
+
                 <h2 className={styles.title}>Sign Up</h2>
                 <form className={styles.form}>
                     <input
@@ -87,7 +97,7 @@ const SignUp = () => {
                     <button type="submit" className={styles.button}
                         onClick={handleSignUp}
                     >
-                        Sign Up
+                        {loading ? (<div style={{ display: "flex", justifyContent: "center" }}><Loader /></div>) : "Sign Up"}
                     </button>
                 </form>
                 <p className={styles.footer}>

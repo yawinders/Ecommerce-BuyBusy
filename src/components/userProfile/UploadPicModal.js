@@ -10,33 +10,52 @@ const UploadPicModal = ({ toggelUploadPicModal }) => {
     const [previewUrl, setPreviewUrl] = useState(null);
     // const { profilePicUrl } = useSelector(userProfileSelector)
     // console.log(profilePicUrl);
-    const [base64Image, setBase64Image] = useState(null)
+    const [cloudImage, setCloudImage] = useState("")
 
     const { user } = useSelector(authSelector)
     const dispatch = useDispatch();
 
     const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setProfilePic(file)
-            const fileUrl = URL.createObjectURL(file);
-            setPreviewUrl(fileUrl);
-
-
-            // Convert the Blob (file) to a Base64 string
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                // This is the Base64 representation of the image
-                const base64Imagee = reader.result;
-                setBase64Image(base64Imagee)
-                console.log("Base64 Image: ", base64Image);
-
-                // You can now use the base64Image (save it to Firebase, display it, etc.)
-                // For example, saving it to Firebase:
-                // saveProfileImageToFirestore(userId, base64Image);
-            };
-            reader.readAsDataURL(file);
+        const pics = e.target.files[0];
+        if (pics === undefined) {
+            toast.error("Please Select an Image")
         }
+        if (pics.type === "image/jpeg" || pics.type === "image/png") {
+            const data = new FormData();
+            data.append("file", pics)
+            data.append("upload_preset", "buy-busy")
+
+            fetch("https://api.cloudinary.com/v1_1/deuein9wj/image/upload", {
+                method: "post",
+                body: data,
+            }).then((res) => res.json())
+                .then((data) => {
+                    console.log(data);
+                    setCloudImage(data.url)
+
+                })
+
+
+        }
+        // const file = e.target.files[0];
+        // if (file) {
+        //     setProfilePic(file)
+        //     const fileUrl = URL.createObjectURL(file);
+        //     setPreviewUrl(fileUrl);
+
+
+
+        //     const reader = new FileReader();
+        //     reader.onloadend = () => {
+
+        //         const base64Imagee = reader.result;
+        //         setBase64Image(base64Imagee)
+        //         console.log("Base64 Image: ", base64Image);
+
+
+        //     };
+        //     reader.readAsDataURL(file);
+        // }
     }
 
     const handleNegativeClose = (e) => {
@@ -52,11 +71,14 @@ const UploadPicModal = ({ toggelUploadPicModal }) => {
             alert("Please Login to Update Profile")
             return
         }
-        if (!profilePic) {
+        if (!cloudImage) {
             alert("Must Selelct Something")
             return
         }
-        dispatch(uploadProfilePic(base64Image, user.uid))
+        // if (cloudImage) {
+        //     dispatch(userProfileActions.setProfilePic(cloudImage))
+        // }
+        dispatch(uploadProfilePic(cloudImage, user.uid))
         toggelUploadPicModal()
         toast.success("Image Uploaded Successfully")
 

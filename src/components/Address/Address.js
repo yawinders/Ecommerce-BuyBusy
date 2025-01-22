@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { actionAddress } from '../../redux/reducers/addressReducer';
 import RazorpayButton from '../RazorPayButton';
 
-const Address = ({ address, setAddress }) => {
+const Address = ({ address, setAddress, total }) => {
     const [isConfirmed, setIsConfirmed] = useState(false);
     const [showPayButton, setShowPayButton] = useState(false);
     const dispatch = useDispatch()
@@ -46,7 +46,7 @@ const Address = ({ address, setAddress }) => {
                             Proceed to Payment
                         </button>
                     ) : (
-                        <RazorpayButton /> // Render the Razorpay payment button
+                        <RazorpayButton total={total} /> // Render the Razorpay payment button
                     )}
                 </div>
             )}

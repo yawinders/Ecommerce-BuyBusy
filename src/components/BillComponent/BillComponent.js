@@ -72,7 +72,7 @@ const BillComponent = () => {
                 </button>
             </div>
             {proceedToPayment && (
-                <Address address={address} setAddress={setAddress} />
+                <Address address={address} setAddress={setAddress} total={total} />
             )}
         </div>
     );

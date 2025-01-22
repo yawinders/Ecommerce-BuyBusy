@@ -61,8 +61,8 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    font-size: 1.5rem;
-    margin-right: 20px;
+    font-size: 1.2rem;
+    margin: 0 20px;
     color: #90ee90;
 }
 
@@ -84,12 +84,15 @@
 
 .searchBar {
     display: flex;
+    /* flex-direction: column; */
     align-items: center;
+    justify-content: space-between;
     background-color: white;
     padding: 5px;
     border-radius: 4px;
-    width: 700px;
-    position: relative;
+
+    /* position: absolute; */
+    width: 30%;
     right: 100px;
 }
 
@@ -109,9 +112,9 @@
 }
 
 .flag {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* display: flex;
+    align-items: center; */
+    /* justify-content: center;/ */
     margin-right: 10px;
 }
 
@@ -122,10 +125,13 @@
 }
 
 .suggestionList {
-    position: fixed;
-    top: 38%;
+    position: absolute;
+    width: 30%;
+    top: 70%;
+
+    /* top: 38%; */
     /* Center vertically */
-    left: 51%;
+    /* left: 51%; */
     /* Center horizontally */
     transform: translate(-50%, -50%);
     /* True centering */
@@ -139,7 +145,7 @@
     /* Smooth edges */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     /* Slight shadow for depth */
-    width: 700px;
+
     /* Adjust width */
     padding: 10px;
     /* Spacing inside */

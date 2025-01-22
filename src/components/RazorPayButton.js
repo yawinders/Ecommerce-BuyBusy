@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { placeOrder } from '../redux/reducers/myorderReducer';
 
 
-const RazorpayButton = () => {
+const RazorpayButton = ({ total }) => {
 
     const { items } = useSelector(cartSelector);
     const { user } = useSelector(authSelector)
@@ -66,7 +66,7 @@ const RazorpayButton = () => {
 
     return (
         <button onClick={handlePayment}>
-            Pay Amount
+            {`Pay Amount ${total}`}
         </button>
     );
 };
